@@ -103,7 +103,7 @@ export default function TimezoneCard({
 
   return (
     <>
-      <Card className="bg-gradient-to-br from-white to-gray-50 border-border shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:-translate-y-0.5 transition-all duration-300 aspect-[3/4] group">
+      <Card className="bg-gradient-to-br from-white to-gray-50 border-border shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300 h-full group will-change-transform">
         <CardHeader className="pb-4 relative p-6">
           <button
             onClick={onRemove}

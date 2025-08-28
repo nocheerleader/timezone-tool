@@ -21,6 +21,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${openSans.variable} ${jetbrainsMono.variable} antialiased`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Suppress ResizeObserver loop error
+              window.addEventListener('error', function(e) {
+                if (e.message === 'ResizeObserver loop completed with undelivered notifications.' || 
+                    e.message === 'ResizeObserver loop limit exceeded') {
+                  e.stopImmediatePropagation();
+                }
+              });
+            `,
+          }}
+        />
+      </head>
       <body className="bg-background text-foreground font-sans">{children}</body>
     </html>
   )

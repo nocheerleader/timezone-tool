@@ -4,7 +4,7 @@ import { useState } from "react"
 import TimezoneCard from "@/components/timezone-card"
 import CompactTimezoneStrip from "@/components/compact-timezone-strip"
 import { Button } from "@/components/ui/button"
-import { LayoutGrid, Minus, Clock } from "lucide-react"
+import { LayoutGrid, Minus } from "lucide-react"
 
 const availableTimezones = [
   { city: "New York", timezone: "America/New_York", country: "United States", flag: "🇺🇸", offset: "UTC-5" },
@@ -20,6 +20,9 @@ const availableTimezones = [
   { city: "Tokyo", timezone: "Asia/Tokyo", country: "Japan", flag: "🇯🇵", offset: "UTC+9" },
   { city: "Sydney", timezone: "Australia/Sydney", country: "Australia", flag: "🇦🇺", offset: "UTC+11" },
   { city: "Auckland", timezone: "Pacific/Auckland", country: "New Zealand", flag: "🇳🇿", offset: "UTC+13" },
+  { city: "Guatemala City", timezone: "America/Guatemala", country: "Guatemala", flag: "🇬🇹", offset: "UTC-6" },
+  { city: "Cape Town", timezone: "Africa/Johannesburg", country: "South Africa", flag: "🇿🇦", offset: "UTC+2" },
+  { city: "Tunis", timezone: "Africa/Tunis", country: "Tunisia", flag: "🇹🇳", offset: "UTC+1" },
 ]
 
 const defaultTimezones = [
@@ -62,7 +65,7 @@ export default function Home() {
           <p className="text-gray-600 text-lg mb-6">Real-time local hours for remote teams</p>
 
           {/* Controls */}
-          <div className="flex items-center justify-center gap-6 mb-2">
+          <div className="flex items-center justify-center gap-6 mb-2 flex-wrap">
             {/* View Toggle */}
             <div className="flex items-center gap-3">
               <Button
@@ -87,7 +90,6 @@ export default function Home() {
 
             {/* Time Format Toggle */}
             <div className="flex items-center gap-3">
-              
               <Button
                 onClick={() => setIs24HourFormat(true)}
                 variant={is24HourFormat ? "default" : "outline"}
@@ -111,21 +113,22 @@ export default function Home() {
         {isCompactView ? (
           <CompactTimezoneStrip timezones={selectedTimezones} is24HourFormat={is24HourFormat} />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 auto-rows-fr">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {selectedTimezones.map((timezone, index) => (
-              <TimezoneCard
-                key={`${timezone.timezone}-${index}`}
-                city={timezone.city}
-                timezone={timezone.timezone}
-                country={timezone.country}
-                flag={timezone.flag}
-                offset={timezone.offset}
-                availableTimezones={availableTimezones}
-                allSelectedTimezones={selectedTimezones}
-                is24HourFormat={is24HourFormat}
-                onTimezoneChange={(newTimezone) => handleTimezoneChange(index, newTimezone)}
-                onRemove={() => removeTimezone(index)}
-              />
+              <div key={`${timezone.timezone}-${index}`} className="h-[400px]">
+                <TimezoneCard
+                  city={timezone.city}
+                  timezone={timezone.timezone}
+                  country={timezone.country}
+                  flag={timezone.flag}
+                  offset={timezone.offset}
+                  availableTimezones={availableTimezones}
+                  allSelectedTimezones={selectedTimezones}
+                  is24HourFormat={is24HourFormat}
+                  onTimezoneChange={(newTimezone) => handleTimezoneChange(index, newTimezone)}
+                  onRemove={() => removeTimezone(index)}
+                />
+              </div>
             ))}
           </div>
         )}
@@ -137,7 +140,7 @@ export default function Home() {
               variant="outline"
               className="px-8 py-3 bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-gray-300 text-gray-700 font-medium shadow-sm hover:shadow-md transition-all duration-200"
             >
-              Add Another Team Mate 
+              Add Another Team Mate
             </Button>
           </div>
         )}
