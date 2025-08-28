@@ -23,12 +23,13 @@ const availableTimezones = [
   { city: "Guatemala City", timezone: "America/Guatemala", country: "Guatemala", flag: "🇬🇹", offset: "UTC-6" },
   { city: "Cape Town", timezone: "Africa/Johannesburg", country: "South Africa", flag: "🇿🇦", offset: "UTC+2" },
   { city: "Tunis", timezone: "Africa/Tunis", country: "Tunisia", flag: "🇹🇳", offset: "UTC+1" },
+  { city: "Dar es Salaam", timezone: "Africa/Dar_es_Salaam", country: "Tanzania", flag: "🇹🇿", offset: "UTC+3" },
 ]
 
 const defaultTimezones = [
   availableTimezones.find((tz) => tz.timezone === "Europe/London")!,
   availableTimezones.find((tz) => tz.timezone === "America/Guatemala")!,
-  availableTimezones.find((tz) => tz.timezone === "Africa/Johannesburg")!,
+  availableTimezones.find((tz) => tz.timezone === "Africa/Dar_es_Salaam")!,
   availableTimezones.find((tz) => tz.timezone === "Africa/Tunis")!,
 ]
 
