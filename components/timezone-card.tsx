@@ -107,7 +107,7 @@ export default function TimezoneCard({
         <CardHeader className="pb-4 relative p-6">
           <button
             onClick={onRemove}
-            className="absolute top-3 right-3 w-7 h-7 rounded-full bg-gray-100 hover:bg-red-500 hover:text-white transition-all duration-200 flex items-center justify-center text-gray-500 text-lg font-medium z-10 opacity-0 group-hover:opacity-100"
+            className="absolute top-3 right-3 w-7 h-7 rounded-full bg-gray-100 hover:bg-red-500 hover:text-white transition-all duration-200 flex items-center justify-center text-gray-500 text-lg font-medium z-10"
             aria-label={`Remove ${city} timezone`}
           >
             ×
@@ -115,7 +115,7 @@ export default function TimezoneCard({
           <Button
             onClick={() => setShowCalculator(true)}
             size="sm"
-            className="absolute top-3 right-12 w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-500 hover:text-white transition-all duration-200 flex items-center justify-center text-blue-600 z-10 opacity-0 group-hover:opacity-100 p-0"
+            className="absolute top-3 right-12 w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-500 hover:text-white transition-all duration-200 flex items-center justify-center text-blue-600 z-10 p-0"
             aria-label={`Calculate meeting times from ${city}`}
           >
             <Plus className="w-4 h-4" />
