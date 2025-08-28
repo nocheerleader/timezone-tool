@@ -26,10 +26,10 @@ const availableTimezones = [
 ]
 
 const defaultTimezones = [
-  availableTimezones.find((tz) => tz.timezone === "America/New_York")!,
   availableTimezones.find((tz) => tz.timezone === "Europe/London")!,
-  availableTimezones.find((tz) => tz.timezone === "Asia/Tokyo")!,
-  availableTimezones.find((tz) => tz.timezone === "Australia/Sydney")!,
+  availableTimezones.find((tz) => tz.timezone === "America/Guatemala")!,
+  availableTimezones.find((tz) => tz.timezone === "Africa/Johannesburg")!,
+  availableTimezones.find((tz) => tz.timezone === "Africa/Tunis")!,
 ]
 
 export default function Home() {
