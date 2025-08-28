@@ -144,6 +144,21 @@ export default function Home() {
             </Button>
           </div>
         )}
+
+        {/* Footer */}
+        <div className="text-center mt-16 pb-8">
+          <p className="text-sm text-gray-500">
+            made with love ❤️ by{" "}
+            <a
+              href="https://x.com/nocheerleader"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200"
+            >
+              ciara
+            </a>
+          </p>
+        </div>
       </div>
     </main>
   )
