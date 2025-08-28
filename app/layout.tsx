@@ -25,13 +25,41 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              // Suppress ResizeObserver loop error
-              window.addEventListener('error', function(e) {
-                if (e.message === 'ResizeObserver loop completed with undelivered notifications.' || 
-                    e.message === 'ResizeObserver loop limit exceeded') {
-                  e.stopImmediatePropagation();
-                }
-              });
+              // Comprehensive ResizeObserver error suppression
+              (function() {
+                const resizeObserverErrorHandler = function(e) {
+                  if (
+                    e.message === 'ResizeObserver loop completed with undelivered notifications.' ||
+                    e.message === 'ResizeObserver loop limit exceeded' ||
+                    e.message.includes('ResizeObserver') ||
+                    e.error?.message?.includes('ResizeObserver')
+                  ) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    return false;
+                  }
+                };
+
+                // Handle both error events and unhandled promise rejections
+                window.addEventListener('error', resizeObserverErrorHandler);
+                window.addEventListener('unhandledrejection', function(e) {
+                  if (e.reason?.message?.includes('ResizeObserver')) {
+                    e.preventDefault();
+                    return false;
+                  }
+                });
+
+                // Override console.error to filter ResizeObserver errors
+                const originalConsoleError = console.error;
+                console.error = function(...args) {
+                  if (args.some(arg => 
+                    typeof arg === 'string' && arg.includes('ResizeObserver')
+                  )) {
+                    return;
+                  }
+                  originalConsoleError.apply(console, args);
+                };
+              })();
             `,
           }}
         />

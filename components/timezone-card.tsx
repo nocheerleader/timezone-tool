@@ -94,98 +94,116 @@ export default function TimezoneCard({
   const workStatus = getWorkHoursStatus()
   const statusColors = {
     business: "bg-green-500",
-    "early-late": "bg-yellow-500",
+    "early-late": "bg-amber-500",
     night: "bg-red-500",
-    unknown: "bg-gray-400",
+    unknown: "bg-muted",
   }
 
   const currentTimezone = { city, timezone, country, flag, offset }
 
   return (
     <>
-      <Card className="bg-gradient-to-br from-white to-gray-50 border-border shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300 h-full group will-change-transform">
-        <CardHeader className="pb-4 relative p-6">
-          <button
-            onClick={onRemove}
-            className="absolute top-3 right-3 w-7 h-7 rounded-full bg-gray-100 hover:bg-red-500 hover:text-white transition-all duration-200 flex items-center justify-center text-gray-500 text-lg font-medium z-10"
-            aria-label={`Remove ${city} timezone`}
-          >
-            ×
-          </button>
-          <Button
-            onClick={() => setShowCalculator(true)}
-            size="sm"
-            className="absolute top-3 right-12 w-7 h-7 rounded-full bg-blue-100 hover:bg-blue-500 hover:text-white transition-all duration-200 flex items-center justify-center text-blue-600 z-10 p-0"
-            aria-label={`Calculate meeting times from ${city}`}
-          >
-            <Plus className="w-4 h-4" />
-          </Button>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl" role="img" aria-label={`${country} flag`}>
-                {flag}
-              </span>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="font-semibold text-card-foreground text-lg leading-tight">{city}</h3>
-                  <div
-                    className={`w-2 h-2 rounded-full ${statusColors[workStatus]}`}
-                    title={
-                      workStatus === "business"
-                        ? "Business hours"
-                        : workStatus === "early-late"
-                          ? "Early/Late hours"
-                          : "Night hours"
-                    }
-                  />
+      <Card className="bg-card border-border shadow-sm hover:shadow-lg hover:shadow-primary/10 transition-all duration-300 ease-out h-full group border-none cursor-pointer transform-gpu">
+        <div className="group-hover:scale-[1.01] group-hover:-translate-y-0.5 transition-transform duration-300 ease-out transform-gpu">
+          <CardHeader className="pb-4 relative p-6">
+            <button
+              onClick={onRemove}
+              className="absolute top-3 right-3 w-7 h-7 rounded-full bg-muted hover:bg-destructive hover:text-destructive-foreground hover:scale-105 transition-all duration-200 flex items-center justify-center text-muted-foreground text-lg font-medium z-10 transform-gpu"
+              aria-label={`Remove ${city} timezone`}
+            >
+              ×
+            </button>
+            <Button
+              onClick={() => setShowCalculator(true)}
+              size="sm"
+              className="absolute top-3 right-12 w-7 h-7 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground hover:scale-105 transition-all duration-200 flex items-center justify-center text-primary z-10 p-0 transform-gpu"
+              aria-label={`Calculate meeting times from ${city}`}
+            >
+              <Plus className="w-4 h-4" />
+            </Button>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span
+                  className="text-2xl group-hover:scale-105 transition-transform duration-300 ease-out transform-gpu"
+                  role="img"
+                  aria-label={`${country} flag`}
+                >
+                  {flag}
+                </span>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-semibold text-card-foreground text-lg leading-tight group-hover:text-primary transition-colors duration-300">
+                      {city}
+                    </h3>
+                    <div
+                      className={`w-2 h-2 rounded-full ${statusColors[workStatus]} group-hover:scale-110 transition-transform duration-300 transform-gpu`}
+                      title={
+                        workStatus === "business"
+                          ? "Business hours"
+                          : workStatus === "early-late"
+                            ? "Early/Late hours"
+                            : "Night hours"
+                      }
+                    />
+                  </div>
+                  <p className="text-muted-foreground text-sm group-hover:text-muted-foreground/80 transition-colors duration-300">
+                    {country}
+                  </p>
                 </div>
-                <p className="text-gray-500 text-sm opacity-70">{country}</p>
               </div>
             </div>
-          </div>
-          <div className="text-right">
-            <span className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-full font-mono">{offset}</span>
-          </div>
-        </CardHeader>
-
-        <CardContent className="flex flex-col items-center justify-center flex-1 pb-6 px-6">
-          <div className="text-center space-y-4 w-full">
-            <div className="space-y-2">
-              <div className="text-4xl font-mono font-semibold text-gray-900">{isLoaded ? time : "--:--"}</div>
-              <div className="text-sm text-gray-600">{isLoaded ? date : "Loading..."}</div>
+            <div className="text-right">
+              <span className="text-xs text-muted-foreground bg-accent px-2 py-1 rounded-full font-mono group-hover:bg-primary/20 group-hover:text-primary transition-all duration-300">
+                {offset}
+              </span>
             </div>
+          </CardHeader>
 
-            <div className="w-full h-px bg-gray-200 my-4"></div>
+          <CardContent className="flex flex-col items-center justify-center flex-1 pb-6 px-6">
+            <div className="text-center space-y-4 w-full">
+              <div className="space-y-2">
+                <div className="text-4xl font-mono font-semibold text-primary group-hover:scale-102 transition-transform duration-300 ease-out transform-gpu">
+                  {isLoaded ? time : "--:--"}
+                </div>
+                <div className="text-sm text-muted-foreground group-hover:text-muted-foreground/80 transition-colors duration-300">
+                  {isLoaded ? date : "Loading..."}
+                </div>
+              </div>
 
-            <div className="space-y-3 w-full">
-              <div className="text-xs text-gray-500 uppercase tracking-wide font-medium">Select Time Zone</div>
-              <Select
-                value={timezone}
-                onValueChange={(value) => {
-                  const selectedTimezone = availableTimezones.find((tz) => tz.timezone === value)
-                  if (selectedTimezone) {
-                    onTimezoneChange(selectedTimezone)
-                  }
-                }}
-              >
-                <SelectTrigger className="w-full bg-white hover:bg-gray-50 text-gray-900 text-sm border border-gray-200 shadow-sm transition-colors duration-200 [&>svg]:text-gray-600">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-white border border-gray-200 shadow-lg">
-                  {availableTimezones.map((tz) => (
-                    <SelectItem key={tz.timezone} value={tz.timezone} className="hover:bg-gray-50">
-                      <div className="flex items-center gap-2">
-                        <span>{tz.flag}</span>
-                        <span className="text-gray-900">{tz.city}</span>
-                        <span className="text-gray-500 text-xs font-mono">({tz.offset})</span>
-                      </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <div className="w-full h-px bg-border my-4 group-hover:bg-primary/20 transition-colors duration-300"></div>
+
+              <div className="space-y-3 w-full">
+                <div className="text-xs text-muted-foreground uppercase tracking-wide font-medium group-hover:text-primary/70 transition-colors duration-300">
+                  Select Time Zone
+                </div>
+                <Select
+                  value={timezone}
+                  onValueChange={(value) => {
+                    const selectedTimezone = availableTimezones.find((tz) => tz.timezone === value)
+                    if (selectedTimezone) {
+                      onTimezoneChange(selectedTimezone)
+                    }
+                  }}
+                >
+                  <SelectTrigger className="w-full bg-card hover:bg-accent text-card-foreground text-sm border border-border shadow-sm transition-colors duration-200 group-hover:border-primary/30">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover border border-border shadow-lg">
+                    {availableTimezones.map((tz) => (
+                      <SelectItem key={tz.timezone} value={tz.timezone} className="hover:bg-accent">
+                        <div className="flex items-center gap-2">
+                          <span>{tz.flag}</span>
+                          <span className="text-popover-foreground">{tz.city}</span>
+                          <span className="text-muted-foreground text-xs font-mono">({tz.offset})</span>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-          </div>
-        </CardContent>
+          </CardContent>
+        </div>
       </Card>
 
       <TimeCalculatorModal

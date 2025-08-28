@@ -4,7 +4,7 @@ import { useState } from "react"
 import TimezoneCard from "@/components/timezone-card"
 import CompactTimezoneStrip from "@/components/compact-timezone-strip"
 import { Button } from "@/components/ui/button"
-import { LayoutGrid, Minus } from "lucide-react"
+import { LayoutGrid, Minus, ChevronDown, ChevronUp } from "lucide-react"
 
 const availableTimezones = [
   { city: "New York", timezone: "America/New_York", country: "United States", flag: "🇺🇸", offset: "UTC-5" },
@@ -37,6 +37,7 @@ export default function Home() {
   const [selectedTimezones, setSelectedTimezones] = useState(defaultTimezones)
   const [isCompactView, setIsCompactView] = useState(false)
   const [is24HourFormat, setIs24HourFormat] = useState(true)
+  const [showGuide, setShowGuide] = useState(false)
 
   const handleTimezoneChange = (cardIndex: number, newTimezone: (typeof availableTimezones)[0]) => {
     setSelectedTimezones((prev) => prev.map((tz, index) => (index === cardIndex ? newTimezone : tz)))
@@ -59,11 +60,51 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">
+    <main className="min-h-screen bg-white p-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-3">Make Time Make Sense</h1>
-          <p className="text-gray-600 text-lg mb-6">Real-time local hours for remote teams</p>
+          <h1 className="text-4xl font-bold text-foreground mb-3">Make Time Make Sense</h1>
+          <p className="text-muted-foreground text-lg mb-4">Real-time local hours for remote teams</p>
+
+          {/* Quick Guide Section */}
+          <div className="mb-6">
+            <button
+              onClick={() => setShowGuide(!showGuide)}
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+            >
+              <span>quick guide</span>
+              {showGuide ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
+
+            {showGuide && (
+              <div className="mt-4 p-4 bg-card rounded-lg shadow-sm border border-border max-w-md mx-auto text-left">
+                <h3 className="font-semibold text-card-foreground mb-3 text-center">getting started in 30 seconds:</h3>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary font-semibold">+</span>
+                    <span>
+                      <strong className="text-card-foreground">add teammates:</strong> click "add another team mate"
+                      below the cards
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-destructive font-semibold">×</span>
+                    <span>
+                      <strong className="text-card-foreground">remove cards:</strong> click the × on any card you don't
+                      need
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary font-semibold">+</span>
+                    <span>
+                      <strong className="text-card-foreground">plan meetings:</strong> click the + button to find the
+                      best meeting times across all zones
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
 
           {/* Controls */}
           <div className="flex items-center justify-center gap-6 mb-2 flex-wrap">
@@ -139,7 +180,7 @@ export default function Home() {
             <Button
               onClick={addNewTimezone}
               variant="outline"
-              className="px-8 py-3 bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-gray-300 text-gray-700 font-medium shadow-sm hover:shadow-md transition-all duration-200"
+              className="px-8 py-3 bg-card hover:bg-accent border-2 border-border hover:border-primary text-card-foreground font-medium shadow-sm hover:shadow-md transition-all duration-200"
             >
               Add Another Team Mate
             </Button>
@@ -148,13 +189,13 @@ export default function Home() {
 
         {/* Footer */}
         <div className="text-center mt-16 pb-8">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-muted-foreground">
             made with love ❤️ by{" "}
             <a
               href="https://x.com/nocheerleader"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200"
+              className="text-primary hover:text-accent-foreground font-medium transition-colors duration-200"
             >
               ciara
             </a>

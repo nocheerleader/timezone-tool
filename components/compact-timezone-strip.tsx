@@ -59,19 +59,19 @@ export default function CompactTimezoneStrip({ timezones, is24HourFormat }: Comp
 
   const statusColors = {
     business: "bg-green-500",
-    "early-late": "bg-yellow-500",
+    "early-late": "bg-amber-500",
     night: "bg-red-500",
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] p-6 mx-auto max-w-6xl">
+    <div className="bg-card rounded-xl shadow-sm border border-border p-6 mx-auto max-w-6xl">
       <div className="flex flex-wrap gap-6 justify-center items-center">
         {timezones.map((tz) => {
           const workStatus = getWorkHoursStatus(tz.timezone)
           return (
             <div
               key={tz.timezone}
-              className="flex items-center gap-3 min-w-[140px] group hover:bg-gray-50 rounded-lg p-3 transition-colors duration-200"
+              className="flex items-center gap-3 min-w-[140px] group hover:bg-accent rounded-lg p-3 transition-colors duration-200"
             >
               <div className="flex items-center gap-2">
                 <span className="text-lg" role="img" aria-label={`${tz.country} flag`}>
@@ -89,8 +89,8 @@ export default function CompactTimezoneStrip({ timezones, is24HourFormat }: Comp
                 />
               </div>
               <div className="text-center">
-                <div className="text-sm font-medium text-gray-900 mb-1">{tz.city}</div>
-                <div className="text-lg font-mono font-semibold text-gray-800">{times[tz.timezone] || "--:--"}</div>
+                <div className="text-sm font-medium text-card-foreground mb-1">{tz.city}</div>
+                <div className="text-lg font-mono font-semibold text-primary">{times[tz.timezone] || "--:--"}</div>
               </div>
             </div>
           )
